@@ -8,6 +8,10 @@ import {
   Zap,
   Coins,
   LucideIcon,
+  ImageIcon,
+  Sparkles,
+  LayoutGrid,
+  Share2,
 } from "lucide-react";
 import {
   calculatePricingExamples,
@@ -21,6 +25,10 @@ const iconMap: Record<string, LucideIcon> = {
   FileText,
   GraduationCap,
   Zap,
+  Image: ImageIcon,
+  Sparkles,
+  LayoutGrid,
+  Share2,
 };
 
 interface PricingSectionProps {
@@ -33,6 +41,7 @@ export default function PricingSection({ modelId, color }: PricingSectionProps) 
   const examples = calculatePricingExamples(modelId);
   const priceTier = getPriceTier(modelId);
   const tierInfo = priceTierLabels[priceTier];
+  const isImageModel = pricing?.isImageModel || false;
 
   if (!pricing || !examples) return null;
 
@@ -86,7 +95,9 @@ export default function PricingSection({ modelId, color }: PricingSectionProps) 
           </div>
         </div>
         <p className="text-xs text-gray-400 mt-2">
-          * 1천 토큰 = 한글 약 1,600자 = A4 약 1장 분량
+          {isImageModel
+            ? "* 이미지 1장 생성 시 프롬프트(입력) + 이미지 데이터(출력) 토큰이 사용됩니다"
+            : "* 1천 토큰 = 한글 약 1,600자 = A4 약 1장 분량"}
         </p>
       </div>
 
@@ -133,8 +144,10 @@ export default function PricingSection({ modelId, color }: PricingSectionProps) 
       {/* Comparison Tip */}
       <div className="mt-6 p-4 bg-blue-50 rounded-xl">
         <p className="text-sm text-blue-800">
-          <span className="font-semibold">참고:</span> 일반적으로 AI에게 질문하면 입력(질문)보다 출력(답변)이 3배 정도 깁니다.
-          위 계산은 이를 기준으로 한 예상치예요.
+          <span className="font-semibold">참고:</span>{" "}
+          {isImageModel
+            ? "이미지 해상도와 프롬프트 길이에 따라 실제 비용이 달라질 수 있어요. 위 계산은 평균적인 사용량 기준 예상치입니다."
+            : "일반적으로 AI에게 질문하면 입력(질문)보다 출력(답변)이 3배 정도 깁니다. 위 계산은 이를 기준으로 한 예상치예요."}
         </p>
       </div>
     </motion.div>

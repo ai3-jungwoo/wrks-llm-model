@@ -1,6 +1,12 @@
 // 모델별 가격 정보 (1천 토큰당 원화)
 // 1천 토큰 = 한글 약 1,600자 = A4 약 1장
-export const modelPricing: Record<string, { input: number; output: number }> = {
+export interface ModelPricing {
+  input: number;
+  output: number;
+  isImageModel?: boolean; // 이미지 생성 모델 여부
+}
+
+export const modelPricing: Record<string, ModelPricing> = {
   // OpenAI
   "gpt-5-2": { input: 6.431, output: 51.45 },
   "gpt-5-2-pro": { input: 77.175, output: 617.4 },
@@ -33,6 +39,7 @@ export const modelPricing: Record<string, { input: number; output: number }> = {
 
   // Google
   "gemini-3-pro": { input: 7.35, output: 44.1 },
+  "nano-banana-pro": { input: 7.35, output: 441, isImageModel: true }, // 이미지 생성 모델
   "gemini-deep-research": { input: 3.55, output: 21.3 },
   "gemini-3-flash": { input: 1.8375, output: 11.025 },
   "gemini-2-5-pro": { input: 4.595, output: 36.75 },
@@ -67,6 +74,7 @@ export const modelPricing: Record<string, { input: number; output: number }> = {
 // A4 1장 = 약 1,600자 = 약 1천 토큰
 // 대학생 레포트 평균: A4 5장 = 약 5천 토큰
 // 일반적인 AI 대화 1회: 입력 500토큰 + 출력 1,500토큰 (질문 짧고, 답변 길게)
+// 이미지 생성 1회: 입력 200토큰(프롬프트) + 출력 1,500토큰(이미지)
 
 export interface PricingExample {
   icon: string;
@@ -76,13 +84,64 @@ export interface PricingExample {
   description: string;
 }
 
-export function calculatePricingExamples(
-  modelId: string,
-  budget: number = 10000
-): PricingExample[] | null {
-  const pricing = modelPricing[modelId];
-  if (!pricing) return null;
+// 이미지 모델용 가격 계산
+function calculateImagePricingExamples(
+  pricing: ModelPricing,
+  budget: number
+): PricingExample[] {
+  // 이미지 1장 생성 비용 (프롬프트 0.2k + 이미지 출력 1.5k 토큰)
+  const imageCost = pricing.input * 0.2 + pricing.output * 1.5;
+  const images = Math.floor(budget / imageCost);
 
+  // 고화질(4K) 이미지 (프롬프트 0.3k + 이미지 출력 2.5k 토큰)
+  const hdImageCost = pricing.input * 0.3 + pricing.output * 2.5;
+  const hdImages = Math.floor(budget / hdImageCost);
+
+  // 썸네일/저화질 이미지 (프롬프트 0.1k + 이미지 출력 0.8k 토큰)
+  const thumbCost = pricing.input * 0.1 + pricing.output * 0.8;
+  const thumbnails = Math.floor(budget / thumbCost);
+
+  // SNS 콘텐츠 세트 (이미지 3장 + 캡션)
+  const snsSetCost = imageCost * 3 + pricing.output * 0.5;
+  const snsSets = Math.floor(budget / snsSetCost);
+
+  return [
+    {
+      icon: "Image",
+      label: "이미지 생성",
+      count: images,
+      unit: "장",
+      description: "일반 품질 이미지",
+    },
+    {
+      icon: "Sparkles",
+      label: "고화질(4K)",
+      count: hdImages,
+      unit: "장",
+      description: "상업용 고품질 이미지",
+    },
+    {
+      icon: "LayoutGrid",
+      label: "썸네일",
+      count: thumbnails,
+      unit: "장",
+      description: "빠른 미리보기용",
+    },
+    {
+      icon: "Share2",
+      label: "SNS 세트",
+      count: snsSets,
+      unit: "세트",
+      description: "이미지 3장 + 캡션",
+    },
+  ];
+}
+
+// 텍스트 모델용 가격 계산
+function calculateTextPricingExamples(
+  pricing: ModelPricing,
+  budget: number
+): PricingExample[] {
   // 1회 AI 대화 비용 계산 (입력 0.5k + 출력 1.5k 토큰)
   const conversationCost = pricing.input * 0.5 + pricing.output * 1.5;
   const conversations = Math.floor(budget / conversationCost);
@@ -95,7 +154,7 @@ export function calculatePricingExamples(
   const reportCost = pricing.output * 5;
   const reports = Math.floor(budget / reportCost);
 
-  // 짧은 질문 1000회 비용 (각 입력 0.1k + 출력 0.3k)
+  // 짧은 질문 (각 입력 0.1k + 출력 0.3k)
   const shortQACost = pricing.input * 0.1 + pricing.output * 0.3;
   const shortQAs = Math.floor(budget / shortQACost);
 
@@ -129,6 +188,21 @@ export function calculatePricingExamples(
       description: "짧은 질문과 짧은 답변",
     },
   ];
+}
+
+export function calculatePricingExamples(
+  modelId: string,
+  budget: number = 10000
+): PricingExample[] | null {
+  const pricing = modelPricing[modelId];
+  if (!pricing) return null;
+
+  // 이미지 모델인 경우 다른 예시 제공
+  if (pricing.isImageModel) {
+    return calculateImagePricingExamples(pricing, budget);
+  }
+
+  return calculateTextPricingExamples(pricing, budget);
 }
 
 // 가격 등급 계산 (저렴/보통/비싼)

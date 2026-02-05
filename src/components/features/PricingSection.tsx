@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import {
   MessageSquare,
@@ -37,13 +38,27 @@ interface PricingSectionProps {
 }
 
 export default function PricingSection({ modelId, color }: PricingSectionProps) {
+  const [budget, setBudget] = useState<number>(10000);
   const pricing = modelPricing[modelId];
-  const examples = calculatePricingExamples(modelId);
+  const examples = useMemo(
+    () => calculatePricingExamples(modelId, budget),
+    [modelId, budget]
+  );
   const priceTier = getPriceTier(modelId);
   const tierInfo = priceTierLabels[priceTier];
   const isImageModel = pricing?.isImageModel || false;
 
   if (!pricing || !examples) return null;
+
+  const handleBudgetChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.replace(/[^0-9]/g, "");
+    const numValue = parseInt(value) || 0;
+    setBudget(numValue);
+  };
+
+  const formatBudget = (value: number) => {
+    return value.toLocaleString();
+  };
 
   return (
     <motion.div
@@ -63,7 +78,11 @@ export default function PricingSection({ modelId, color }: PricingSectionProps) 
           </div>
           <div>
             <h2 className="text-lg font-bold text-black">웍스AI 이용 비용</h2>
-            <p className="text-sm text-gray-500">만원으로 이만큼 할 수 있어요</p>
+            <p className="text-sm text-gray-500">
+              {budget >= 10000
+                ? `${(budget / 10000).toLocaleString()}만원으로 이만큼 할 수 있어요`
+                : `${formatBudget(budget)}원으로 이만큼 할 수 있어요`}
+            </p>
           </div>
         </div>
         <span
@@ -74,11 +93,37 @@ export default function PricingSection({ modelId, color }: PricingSectionProps) 
         </span>
       </div>
 
-      {/* Budget Info */}
+      {/* Budget Input */}
       <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-2xl p-5 mb-6">
         <div className="flex items-center gap-2 mb-3">
-          <span className="text-2xl font-bold text-black">10,000원</span>
+          <div className="relative flex items-center">
+            <input
+              type="text"
+              inputMode="numeric"
+              value={formatBudget(budget)}
+              onChange={handleBudgetChange}
+              className="text-2xl font-bold text-black bg-white border-2 border-gray-200 rounded-xl px-4 py-2 w-40 focus:outline-none focus:border-brand-primary transition-colors"
+              style={{ borderColor: budget > 0 ? undefined : "#ef4444" }}
+            />
+            <span className="text-2xl font-bold text-black ml-2">원</span>
+          </div>
           <span className="text-gray-500">기준</span>
+        </div>
+        <div className="flex flex-wrap gap-2 mb-3">
+          {[5000, 10000, 50000, 100000].map((preset) => (
+            <button
+              key={preset}
+              onClick={() => setBudget(preset)}
+              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
+                budget === preset
+                  ? "text-white"
+                  : "bg-white text-gray-600 border border-gray-200 hover:border-gray-300"
+              }`}
+              style={budget === preset ? { backgroundColor: color } : undefined}
+            >
+              {formatBudget(preset)}원
+            </button>
+          ))}
         </div>
         <div className="grid grid-cols-2 gap-3 text-sm">
           <div className="flex items-center gap-2">

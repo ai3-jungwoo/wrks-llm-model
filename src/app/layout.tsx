@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     description: "GPT, Claude, Gemini, Solar 등 49개 AI 모델의 특징을 한눈에 비교하세요.",
     images: [
       {
-        url: "/og-image.png",
+        url: "https://llm.wrks.ai/og-image.png",
         width: 1200,
         height: 630,
         alt: "웍스AI 모델별 특징 안내",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "웍스AI 모델별 특징 안내",
     description: "GPT, Claude, Gemini, Solar 등 49개 AI 모델의 특징을 한눈에 비교하세요.",
-    images: ["/og-image.png"],
+    images: ["https://llm.wrks.ai/og-image.png"],
   },
 
   // 기타

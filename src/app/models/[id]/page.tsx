@@ -49,6 +49,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import Badge from "@/components/ui/Badge";
+import PricingSection from "@/components/features/PricingSection";
 import { aiModels, providerLogos } from "@/lib/data";
 
 const iconMap: Record<string, LucideIcon> = {
@@ -223,6 +224,9 @@ export default function ModelDetailPage() {
                   </p>
                 )}
               </div>
+
+              {/* Pricing Section */}
+              <PricingSection modelId={model.id} color={model.color} />
 
               {/* Source Link */}
               {model.sourceUrl && (

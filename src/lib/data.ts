@@ -9,6 +9,11 @@ export interface AIModel {
   color: string;
   iconName: string;
   isFeatured?: boolean;
+  // 가격 정보 (1천 토큰당 원화)
+  pricing?: {
+    input: number;  // 입력 1천 토큰당 원
+    output: number; // 출력 1천 토큰당 원
+  };
 }
 
 // 웍스AI 대표 모델 7종
@@ -34,6 +39,7 @@ export const openaiModels: AIModel[] = [
     tags: ["대표 모델", "자동 작업", "코딩"],
     color: "#000000",
     iconName: "Sparkles",
+    pricing: { input: 6.431, output: 51.45 },
   },
   {
     id: "gpt-5-2-pro",
@@ -45,6 +51,7 @@ export const openaiModels: AIModel[] = [
     tags: ["전문가용", "연구", "데이터 분석"],
     color: "#000000",
     iconName: "GraduationCap",
+    pricing: { input: 77.175, output: 617.4 },
   },
   {
     id: "gpt-5-2-chat",

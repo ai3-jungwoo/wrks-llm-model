@@ -15,8 +15,8 @@ export default function Header({ selectedProvider, onSelectProvider }: HeaderPro
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200">
-      <nav className="max-w-7xl mx-auto px-4 md:px-6">
+    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200 px-4 md:px-6">
+      <nav className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <a href="/" className="flex items-center gap-2 group flex-shrink-0">

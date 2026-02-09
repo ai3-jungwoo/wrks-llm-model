@@ -39,7 +39,7 @@ export const openaiModels: AIModel[] = [
     tags: ["대표 모델", "자동 작업", "코딩"],
     color: "#000000",
     iconName: "Sparkles",
-    pricing: { input: 6.431, output: 51.45 },
+    pricing: { input: 2.581, output: 20.65 },
   },
   {
     id: "gpt-5-2-pro",
@@ -51,7 +51,7 @@ export const openaiModels: AIModel[] = [
     tags: ["전문가용", "연구", "데이터 분석"],
     color: "#000000",
     iconName: "GraduationCap",
-    pricing: { input: 77.175, output: 617.4 },
+    pricing: { input: 30.975, output: 247.8 },
   },
   {
     id: "gpt-5-2-chat",

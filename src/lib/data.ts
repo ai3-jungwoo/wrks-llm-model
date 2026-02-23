@@ -19,8 +19,8 @@ export interface AIModel {
 // 웍스AI 대표 모델 7종
 export const featuredModelIds = [
   "gpt-5-2",
-  "gemini-3-pro",
-  "claude-opus-4-5",
+  "gemini-3-1-pro",
+  "claude-opus-4-6",
   "solar-pro-3",
   "k-exaone-236b",
   "nano-banana-pro",
@@ -242,8 +242,19 @@ export const openaiModels: AIModel[] = [
   },
 ];
 
-// Google 모델 (7종)
+// Google 모델 (8종)
 export const googleModels: AIModel[] = [
+  {
+    id: "gemini-3-1-pro",
+    name: "Gemini 3.1 Pro",
+    provider: "Google",
+    description: "Deep Think 모드와 압도적 멀티모달 분석력을 갖춘 구글의 최신 최상위 에이전트",
+    detailDescription: "Gemini 3.1 Pro는 Google의 최신 최상위 AI 모델로, Deep Think 모드를 통해 복잡한 문제에 대한 심층적인 분석이 가능합니다. 텍스트, 이미지, 비디오, 오디오를 통합적으로 이해하고 처리하는 압도적인 멀티모달 분석력을 갖추고 있으며, 이전 세대 대비 추론 정확도와 컨텍스트 이해 능력이 크게 향상되었습니다.",
+    sourceUrl: "https://deepmind.google/technologies/gemini/",
+    tags: ["깊은 생각", "글+이미지", "자동 작업"],
+    color: "#4285F4",
+    iconName: "Brain",
+  },
   {
     id: "gemini-3-pro",
     name: "Gemini 3.0 Pro",
@@ -323,8 +334,19 @@ export const googleModels: AIModel[] = [
   },
 ];
 
-// Claude 모델 (8종)
+// Claude 모델 (10종)
 export const claudeModels: AIModel[] = [
+  {
+    id: "claude-opus-4-6",
+    name: "Claude Opus 4.6",
+    provider: "Anthropic",
+    description: "현존 최고 지능의 최신 버전, 복잡한 R&D 및 정교한 글쓰기에 최적화된 전문가용 모델",
+    detailDescription: "Claude Opus 4.6은 Anthropic의 최신 플래그십 모델로, 현존하는 AI 모델 중 가장 높은 지능 수준을 자랑합니다. 복잡한 연구개발 과제, 학술 논문 작성, 창작 문학 등 정교한 지적 작업에 최적화되어 있습니다. 이전 세대 대비 추론 능력과 뉘앙스 이해가 한층 향상되었으며, Constitutional AI 기술로 안전성과 유용성의 균형을 이룹니다.",
+    sourceUrl: "https://www.anthropic.com/claude/opus",
+    tags: ["최고 성능", "연구개발", "글쓰기"],
+    color: "#D4A27F",
+    iconName: "Crown",
+  },
   {
     id: "claude-opus-4-5",
     name: "Claude Opus 4.5",
@@ -335,6 +357,17 @@ export const claudeModels: AIModel[] = [
     tags: ["최고 성능", "연구개발", "글쓰기"],
     color: "#D4A27F",
     iconName: "Crown",
+  },
+  {
+    id: "claude-sonnet-4-6",
+    name: "Claude Sonnet 4.6",
+    provider: "Anthropic",
+    description: "Opus급 지능에 속도를 더한 최신 버전, 실무 코딩 및 업무 자동화에 가장 적합한 모델",
+    detailDescription: "Claude Sonnet 4.6은 Anthropic의 최신 Sonnet 시리즈로, Opus급의 지능에 빠른 응답 속도를 결합한 모델입니다. 실무 코딩, 업무 자동화, 대규모 코드베이스 분석에 가장 적합하며, 이전 세대 대비 지시 이행 능력과 코드 품질이 향상되었습니다.",
+    sourceUrl: "https://www.anthropic.com/claude/sonnet",
+    tags: ["코딩", "업무 자동화", "빠름"],
+    color: "#D4A27F",
+    iconName: "Code",
   },
   {
     id: "claude-sonnet-4-5",

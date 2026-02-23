@@ -28,9 +28,11 @@ export const modelPricing: Record<string, ModelPricing> = {
   "gpt-4o-mini": { input: 0.221, output: 0.885 },
 
   // Anthropic
+  "claude-opus-4-6": { input: 7.375, output: 36.875 },
   "claude-opus-4-5": { input: 7.375, output: 36.875 },
   "claude-opus-4-1": { input: 22.125, output: 110.625 },
   "claude-opus-4": { input: 22.125, output: 110.625 },
+  "claude-sonnet-4-6": { input: 4.425, output: 22.125 },
   "claude-sonnet-4-5": { input: 4.425, output: 22.125 },
   "claude-sonnet-4": { input: 4.425, output: 22.125 },
   "claude-haiku-4-5": { input: 1.475, output: 7.375 },
@@ -38,6 +40,7 @@ export const modelPricing: Record<string, ModelPricing> = {
   "claude-haiku-3": { input: 0.369, output: 1.844 },
 
   // Google
+  "gemini-3-1-pro": { input: 2.95, output: 17.7 },
   "gemini-3-pro": { input: 2.95, output: 17.7 },
   "nano-banana-pro": { input: 2.95, output: 17.7, isImageModel: true },
   "gemini-deep-research": { input: 3.55, output: 21.3 }, // 유지 (비즈라우터에 없음)

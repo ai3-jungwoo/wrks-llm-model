@@ -17,6 +17,7 @@ import {
 import {
   calculatePricingExamples,
   modelPricing,
+  displayPricing,
   getPriceTier,
   priceTierLabels,
 } from "@/lib/pricing";
@@ -40,6 +41,7 @@ interface PricingSectionProps {
 export default function PricingSection({ modelId, color }: PricingSectionProps) {
   const [budget, setBudget] = useState<number>(10000);
   const pricing = modelPricing[modelId];
+  const display = displayPricing[modelId] ?? pricing;
   const examples = useMemo(
     () => calculatePricingExamples(modelId, budget),
     [modelId, budget]
@@ -129,13 +131,13 @@ export default function PricingSection({ modelId, color }: PricingSectionProps) 
           <div className="flex items-center gap-2">
             <span className="text-gray-500">입력 비용:</span>
             <span className="font-semibold text-gray-900">
-              {pricing.input.toFixed(2)}원 / 1천 토큰
+              {display.input.toFixed(3).replace(/\.?0+$/, "")}원 / 1천 토큰
             </span>
           </div>
           <div className="flex items-center gap-2">
             <span className="text-gray-500">출력 비용:</span>
             <span className="font-semibold text-gray-900">
-              {pricing.output.toFixed(2)}원 / 1천 토큰
+              {display.output.toFixed(3).replace(/\.?0+$/, "")}원 / 1천 토큰
             </span>
           </div>
         </div>

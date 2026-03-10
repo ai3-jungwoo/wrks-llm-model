@@ -8,6 +8,8 @@ export interface ModelPricing {
 
 export const modelPricing: Record<string, ModelPricing> = {
   // OpenAI
+  "gpt-5-4": { input: 3.688, output: 22.125 },
+  "gpt-5-4-pro": { input: 44.25, output: 265.8 },
   "gpt-5-2": { input: 2.581, output: 20.65 },
   "gpt-5-2-pro": { input: 30.975, output: 247.8 },
   "gpt-5-2-chat": { input: 2.581, output: 20.65 },
@@ -216,6 +218,8 @@ export function calculatePricingExamples(
 // 모든 계산과 표시에 이 가격을 사용
 export const displayPricing: Record<string, ModelPricing> = {
   // OpenAI
+  "gpt-5-4": { input: 9.188, output: 55.125 },
+  "gpt-5-4-pro": { input: 110.25, output: 661.5 },
   "gpt-5-2": { input: 6.431, output: 51.45 },
   "gpt-5-2-pro": { input: 77.175, output: 617.4 },
   "gpt-5-2-chat": { input: 6.431, output: 51.45 },

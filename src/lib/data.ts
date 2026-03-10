@@ -18,6 +18,7 @@ export interface AIModel {
 
 // 웍스AI 대표 모델 7종
 export const featuredModelIds = [
+  "gpt-5-4",
   "gpt-5-2",
   "gemini-3-1-pro",
   "claude-opus-4-6",
@@ -27,8 +28,32 @@ export const featuredModelIds = [
   "gemini-deep-research",
 ];
 
-// OpenAI 모델 (19종)
+// OpenAI 모델 (21종)
 export const openaiModels: AIModel[] = [
+  {
+    id: "gpt-5-4",
+    name: "GPT-5.4",
+    provider: "OpenAI",
+    description: "최신 GPT-5 시리즈의 플래그십 모델로 캐시 입력 지원과 뛰어난 추론 능력",
+    detailDescription: "GPT-5.4는 OpenAI의 최신 플래그십 모델로, 캐시 입력 기능을 지원하여 반복적인 작업에서 비용을 크게 절감할 수 있습니다. 향상된 추론 능력과 컨텍스트 이해력으로 복잡한 문서 분석, 코드 생성, 창의적 작업에서 탁월한 성능을 보여줍니다. 272K 토큰까지는 기본 가격이 적용되며, 그 이상에서는 할증이 적용됩니다.",
+    sourceUrl: "https://openai.com/index/introducing-gpt-5-4/",
+    tags: ["대표 모델", "캐시 지원", "최신", "추론"],
+    color: "#000000",
+    iconName: "Sparkles",
+    pricing: { input: 3.688, output: 22.125 },
+  },
+  {
+    id: "gpt-5-4-pro",
+    name: "GPT-5.4 Pro",
+    provider: "OpenAI",
+    description: "GPT-5.4의 전문가 버전으로 최고 수준의 성능과 정확도 제공",
+    detailDescription: "GPT-5.4 Pro는 GPT-5.4의 전문가 버전으로, 최고 수준의 추론 능력과 정확도를 제공합니다. 복잡한 연구, 고급 데이터 분석, 전문 분야의 심층적인 작업에 최적화되어 있습니다. 가격은 더 높지만 그만큼 뛰어난 결과물을 생성하며, 특히 학술 연구나 비즈니스 인텔리전스 분야에서 탁월한 성능을 발휘합니다.",
+    sourceUrl: "https://openai.com/index/gpt-5-4-pro/",
+    tags: ["전문가용", "최고 성능", "연구", "분석"],
+    color: "#000000",
+    iconName: "Crown",
+    pricing: { input: 44.25, output: 265.8 },
+  },
   {
     id: "gpt-5-2",
     name: "GPT-5.2",

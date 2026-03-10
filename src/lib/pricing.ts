@@ -197,20 +197,24 @@ export function calculatePricingExamples(
   modelId: string,
   budget: number = 10000
 ): PricingExample[] | null {
-  const pricing = modelPricing[modelId];
+  // 웍스AI 공식 가격 사용 (displayPricing 우선, 없으면 modelPricing)
+  const pricing = displayPricing[modelId] || modelPricing[modelId];
   if (!pricing) return null;
 
+  // 이미지 모델 여부 확인
+  const isImageModel = modelPricing[modelId]?.isImageModel || false;
+
   // 이미지 모델인 경우 다른 예시 제공
-  if (pricing.isImageModel) {
+  if (isImageModel) {
     return calculateImagePricingExamples(pricing, budget);
   }
 
   return calculateTextPricingExamples(pricing, budget);
 }
 
-// 웍스AI 공식 홈페이지 기준 표시 가격 (1천 토큰당 원화)
-// 내부 계산은 modelPricing (비즈라우터 기준) 사용, 화면 표시만 이 가격으로
-export const displayPricing: Record<string, { input: number; output: number }> = {
+// 웍스AI 공식 홈페이지 기준 가격 (1천 토큰당 원화)
+// 모든 계산과 표시에 이 가격을 사용
+export const displayPricing: Record<string, ModelPricing> = {
   // OpenAI
   "gpt-5-2": { input: 6.431, output: 51.45 },
   "gpt-5-2-pro": { input: 77.175, output: 617.4 },
@@ -246,7 +250,7 @@ export const displayPricing: Record<string, { input: number; output: number }> =
   // Google
   "gemini-3-1-pro": { input: 7.35, output: 44.1 },
   "gemini-3-pro": { input: 7.35, output: 44.1 },
-  "nano-banana-pro": { input: 7.35, output: 441 },
+  "nano-banana-pro": { input: 7.35, output: 441, isImageModel: true },
   "gemini-deep-research": { input: 3.55, output: 21.3 },
   "gemini-3-flash": { input: 1.8375, output: 11.025 },
   "gemini-2-5-pro": { input: 4.595, output: 36.75 },
@@ -282,13 +286,14 @@ export const displayPricing: Record<string, { input: number; output: number }> =
 export type PriceTier = "budget" | "standard" | "premium";
 
 export function getPriceTier(modelId: string): PriceTier {
-  const pricing = modelPricing[modelId];
+  // 웍스AI 공식 가격 기준으로 등급 계산
+  const pricing = displayPricing[modelId] || modelPricing[modelId];
   if (!pricing) return "standard";
 
   const avgCost = (pricing.input + pricing.output) / 2;
 
-  if (avgCost < 5) return "budget";
-  if (avgCost < 30) return "standard";
+  if (avgCost < 10) return "budget";
+  if (avgCost < 50) return "standard";
   return "premium";
 }
 

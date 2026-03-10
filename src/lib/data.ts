@@ -19,7 +19,6 @@ export interface AIModel {
 // 웍스AI 대표 모델 7종
 export const featuredModelIds = [
   "gpt-5-4",
-  "gpt-5-2",
   "gemini-3-1-pro",
   "claude-opus-4-6",
   "solar-pro-3",

@@ -70,10 +70,7 @@ export const modelPricing: Record<string, ModelPricing> = {
   "solar-pro-3": { input: 4.2, output: 29 },
   "solar-pro-2": { input: 4.41, output: 4.41 },
 
-  // LG
-  "k-exaone-236b": { input: 5.2, output: 36 }, // 유지 (비즈라우터에 없음)
-  "lg-exaone-4-0-1": { input: 0.885, output: 1.475 },
-  "lg-exaone-4-0": { input: 0.885, output: 1.475 },
+
 };
 
 // A4 1장 = 약 1,600자 = 약 1천 토큰
@@ -280,10 +277,7 @@ export const displayPricing: Record<string, ModelPricing> = {
   "solar-pro-3": { input: 4.2, output: 29 },
   "solar-pro-2": { input: 4.41, output: 4.41 },
 
-  // LG
-  "k-exaone-236b": { input: 5.2, output: 36 },
-  "lg-exaone-4-0-1": { input: 8.82, output: 14.7 },
-  "lg-exaone-4-0": { input: 8.82, output: 14.7 },
+
 };
 
 // 가격 등급 계산 (저렴/보통/비싼)

@@ -23,7 +23,6 @@ export const featuredModelIds = [
   "gemini-3-1-pro",
   "claude-opus-4-6",
   "solar-pro-3",
-  "k-exaone-236b",
   "nano-banana-pro",
   "gemini-deep-research",
 ];
@@ -618,41 +617,7 @@ export const upstageModels: AIModel[] = [
 ];
 
 // LG 모델 (3종)
-export const lgModels: AIModel[] = [
-  {
-    id: "k-exaone-236b",
-    name: "K-EXAONE 236B",
-    provider: "LG",
-    description: "LG가 만든 한국 대표 AI 모델. 글로벌 성능 Top 10에 진입한 국산 최강 모델입니다.",
-    detailDescription: "K-EXAONE 236B는 LG AI연구원이 개발한 한국 대표 AI 모델입니다. 2,360억 개의 파라미터를 가진 초거대 언어 모델로, 글로벌 벤치마크에서 Top 10에 진입한 국산 최강 모델입니다. 한국어와 영어 모두에서 뛰어난 성능을 보여주며, 특히 전문 지식 영역에서 높은 정확도를 자랑합니다. LG 그룹의 다양한 사업 영역에서 활용되고 있습니다.",
-    sourceUrl: "https://www.lgresearch.ai/exaone",
-    tags: ["한국 대표", "세계 10위권", "LG"],
-    color: "#A50034",
-    iconName: "Trophy",
-  },
-  {
-    id: "lg-exaone-4-0-1",
-    name: "LG EXAONE 4.0.1",
-    provider: "LG",
-    description: "전문 분야(화학/바이오 등) 데이터 학습 및 추론 정밀도가 향상된 전문가용 모델",
-    detailDescription: "LG EXAONE 4.0.1은 화학, 바이오, 소재 과학 등 전문 분야의 데이터를 집중 학습한 전문가용 모델입니다. LG화학, LG생활건강 등 LG 계열사의 R&D 데이터를 활용하여 해당 분야의 추론 정밀도를 크게 향상시켰습니다. 신약 개발, 소재 연구, 화학 공정 최적화 등 전문적인 과학 연구에 활용됩니다.",
-    sourceUrl: "https://www.lgresearch.ai/exaone",
-    tags: ["전문가용", "화학", "바이오"],
-    color: "#A50034",
-    iconName: "FlaskConical",
-  },
-  {
-    id: "lg-exaone-4-0",
-    name: "LG EXAONE 4.0",
-    provider: "LG",
-    description: "온디바이스와 서버 환경을 모두 지원하며 멀티모달 기능을 갖춘 산업용 모델",
-    detailDescription: "LG EXAONE 4.0은 온디바이스와 서버 환경을 모두 지원하는 산업용 멀티모달 AI 모델입니다. 텍스트, 이미지, 문서를 통합적으로 처리할 수 있으며, 제조 현장, 스마트 팩토리, 품질 관리 등 산업 환경에 최적화되어 있습니다. 엣지 디바이스에서도 구동 가능하여 실시간 의사결정이 필요한 산업 현장에서 활용됩니다.",
-    sourceUrl: "https://www.lgresearch.ai/exaone",
-    tags: ["기기 내 실행", "글+이미지", "산업용"],
-    color: "#A50034",
-    iconName: "Factory",
-  },
-];
+
 
 // 전체 모델 목록
 export const aiModels: AIModel[] = [
@@ -662,7 +627,6 @@ export const aiModels: AIModel[] = [
   ...perplexityModels,
   ...xaiModels,
   ...upstageModels,
-  ...lgModels,
 ];
 
 // Provider 목록
@@ -675,7 +639,6 @@ export const providers = [
   "Perplexity",
   "xAI",
   "Upstage",
-  "LG",
 ];
 
 // Provider별 색상 (브랜드 메인 컬러)
@@ -688,7 +651,6 @@ export const providerColors: Record<string, string> = {
   Perplexity: "#20808D",
   xAI: "#000000",
   Upstage: "#5046E5",
-  LG: "#A50034",
 };
 
 // Provider별 로고 파일명 (public/logos/ 폴더에 저장)
@@ -699,5 +661,4 @@ export const providerLogos: Record<string, string> = {
   Perplexity: "perplexity.png",
   xAI: "xai.png",
   Upstage: "upstage.svg",
-  LG: "lg.png",
 };
